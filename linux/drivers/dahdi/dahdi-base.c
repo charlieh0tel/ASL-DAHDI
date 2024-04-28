@@ -937,9 +937,11 @@ static int dahdi_seq_show(struct seq_file *sfile, void *data)
 	if (!s)
 		return -ENODEV;
 
-	if (s->name)
+	if (strlen(s->name))
 		seq_printf(sfile, "Span %d: %s ", s->spanno, s->name);
-	if (s->desc)
+	else
+		seq_printf(sfile, "Span %d", s->spanno);
+	if (strlen(s->desc))
 		seq_printf(sfile, "\"%s\"", s->desc);
 	else
 		seq_printf(sfile, "\"\"");
@@ -978,9 +980,11 @@ static int dahdi_seq_show(struct seq_file *sfile, void *data)
 	for (x = 0; x < s->channels; x++) {
 		struct dahdi_chan *chan = s->chans[x];
 
-		if (chan->name)
+		if (strlen(chan->name))
 			seq_printf(sfile, "\t%4d %s ", chan->channo,
 					chan->name);
+		else
+			seq_printf(sfile, "\t%4d ", chan->channo);
 
 		if (chan->sig) {
 			if (chan->sig == DAHDI_SIG_SLAVE)
