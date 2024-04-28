@@ -68,7 +68,7 @@ static inline struct dahdi_span *dev_to_span(struct device *dev)
 			return err;				\
 	} while (0)
 
-static int span_uevent(struct device *dev, struct kobj_uevent_env *kenv)
+static int span_uevent(const struct device *dev, struct kobj_uevent_env *kenv)
 {
 	struct dahdi_span *span;
 
@@ -438,7 +438,7 @@ static inline struct dahdi_device *to_ddev(struct device *dev)
 			return err;				\
 	} while (0)
 
-static int device_uevent(struct device *dev, struct kobj_uevent_env *kenv)
+static int device_uevent(const struct device *dev, struct kobj_uevent_env *kenv)
 {
 	struct dahdi_device *ddev;
 
